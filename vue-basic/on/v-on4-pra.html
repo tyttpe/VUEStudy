@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>on指令练习4-关注和取消关注练习</title>
+		<!-- //通过CDN引入Vue.js -->
+		<!-- 开发环境版本，包含了有帮助的命令行警告 -->
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
+		<style type="text/css">
+		
+
+			.like {
+				width: 175px;
+				height: 50px;
+				color: rgb(234, 111, 90);
+				border-radius: 25px;
+				font-size: 14px;
+				background-color: #FFF;
+				border: 1px solid rgb(234, 111, 90);
+				outline: none;
+				display: inline-block;
+			}
+			.nolike{
+				width: 175px;
+				height: 50px;
+				color: #FFF;
+				border-radius: 25px;
+				font-size: 14px;
+				background-color: rgb(234, 111, 90);
+				border: 1px solid rgb(234, 111, 90);
+				outline: none;
+				display: inline-block;
+			}
+			
+
+		</style>
+	</head>
+	<body>
+		<!-- vue-app根容器 -->
+		<div id="app">
+			<button class="like" v-show="followed" @click="add">
+				<i class="icon-heart-empty"></i>喜欢|{{num}}
+			</button>
+			<button class="nolike" v-show="followed===false" @click="substrct">
+				<i class="icon-heart"></i>不喜欢|{{num}}
+			</button>
+		</div>
+		<script type="text/javascript">
+			// 实例化一个Vue对象
+			var app = new Vue({
+				el: '#app',
+				data: {
+					num: 18,
+					followed: false
+				},
+				methods: {
+					substrct: function() {
+						this.followed = !this.followed;
+						this.num = this.num - 1;
+					},
+					add: function() {
+						this.followed = !this.followed;
+						this.num = this.num + 1;
+					}
+				}
+
+			})
+		</script>
+	</body>
+</html>

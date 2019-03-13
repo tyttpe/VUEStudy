@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Vue.js computed练习-搜索页面的实现</title>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<style type="text/css">
+			.container {
+				width: 90%;
+				margin: 0 auto;
+			}
+
+			.input-box {
+				width: 75%;
+				height: 25px;
+				margin-bottom: 15px;
+				margin-left: 5px;
+				padding-top: 5px;
+			}
+
+			.item {
+				display: flex;
+				height: 300px;
+				border: 1px solid #eee;
+				border-radius: 8px;
+
+			}
+
+			.item-title {
+				flex: 1 1 70%;
+				text-decoration: none;
+				color: #000000;
+				font-size: 45px;
+			}
+
+			.item-thumbnail {
+				flex: 1 1 30%
+			}
+
+			.item-thumbnail img {
+				width: 100%;
+				height: 100%;
+			}
+
+			.btn {
+				width: 200px;
+				height: 40px;
+				background-color: #227700;
+				border-radius: 10px;
+				border: none;
+				color: #FFF;
+				font-size: 14px;
+			}
+
+			.text1 {
+				font-size: 30px;
+				color: #C8C8C8;
+				
+			}
+
+			.single1 {
+				text-decoration: none;
+				color: #000000;
+			}
+			.single2{
+				text-decoration: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div class="container">
+				<input type="text" v-model="searchString" placeholder="请输入" class="input-box" />
+				<button type="button" @click="tf" class="btn">搜索</button>
+				
+					<div class="item" v-for="article in filteredArticles">
+					<div class="item-title">
+						<a :href="article.url" target="_blank" class="single1">
+							{{article.title}}
+						</a>
+						<a :href="article.url" target="_blank" class="single2">
+							<p class="text1">
+								{{article.infor}}
+							</p>
+						</a>
+					</div>
+					<div class="item-thumbnail">
+						<img :src="article.image">
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<script type="text/javascript">
+			var app = new Vue({
+				el: '#app',
+				data: {
+					searchString: "",
+					articles: [{
+							"title": "堪称神器的3款在线工具，你一定用得上！",
+							"url": "https://www.jianshu.com/p/e83e7999346b",
+							"infor": "一款在线免费GIF编辑神器，提供在线GIF压缩、视频转GIF、GIF合成、GIF裁剪四个功能，用户无需安装任何插件就可以轻松的进行视频格式转换...",
+							"image": "https://upload-images.jianshu.io/upload_images/11438996-56b25f32c9307b4b?imageMogr2/auto-orient/strip%7CimageView2/2/w/640/format/webp"
+						},
+						{
+							"title": "经典面试题：从 URL 输入到页面展现到底发生什么？",
+							"url": "https://www.jianshu.com/p/45ba3e0d0c7e",
+							"infor": "打开浏览器从输入网址到网页呈现在大家面前，背后到底发生了什么？经历怎么样的一个过程？先给大家来张总体流程图，具体步骤请看下文分解！",
+							"image": "https://upload-images.jianshu.io/upload_images/3973862-d90954249a6f6ccd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp"
+						},
+						{
+							"title": "如何免翻墙使用谷歌搜索和Chrome应用商店",
+							"url": "https://www.jianshu.com/p/484f8e6c88f6",
+							"infor": "可能大家都听过或正在使用谷歌浏览器，但是由于某种原因只能在谷歌浏览器使用百度搜索引擎，至于什么谷歌搜索引擎、谷歌商城、Gmail邮箱统...",
+							"image": "https://upload-images.jianshu.io/upload_images/858154-015a4b083685a3d1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/800/format/webp"
+						},
+						{
+							"title": "四款前所未有好用的黑科技APP，绝对的良心实用，赶紧告诉家人",
+							"url": "https://www.jianshu.com/p/2aec84d269fe",
+							"infor": "手机微信、支付宝、淘宝等应用都是我们经常会使用到的APP，除此之外，我们就来就给...",
+							"image": "https://upload-images.jianshu.io/upload_images/16042993-168b2cb17fd7ec0c?imageMogr2/auto-orient/strip%7CimageView2/2/w/640/format/webp"
+						},
+						{
+							"title": "坚持学英语的方法有哪些",
+							"url": "https://www.jianshu.com/p/0a6a61b0933c",
+							"infor": "学习英语没有什么捷径，至少我认为，我一直以来都是自学英语，从没有听过课堂上老师是怎么讲英语的，都是通过听广播和看视频学会的。我想说...",
+							"image": "https://upload-images.jianshu.io/upload_images/3525704-c7293758fc59e56b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/960/format/webp"
+						}
+					]
+				},
+				computed: {
+					// 计算函数，匹配搜索
+					filteredArticles: function() {
+						var articles_array = this.articles,
+							searchString = this.searchString;
+						//搜索关键词为空,则返回原始数据集
+						if (!searchString) {
+							return articles_array;
+						}
+						//搜索关键词去除无用空格,转换为小写
+						searchString = searchString.trim().toLowerCase();
+						//过滤数组中每个元素
+						articles_array = articles_array.filter(function(item) {
+							if (item.title.toLowerCase().indexOf(searchString) !== -1) {
+								return item;
+							}
+						})
+						// 返回转化后的数组
+						return articles_array;
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

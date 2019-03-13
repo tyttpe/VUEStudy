@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>vue.js computed属性起步练习</title>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<button type="button" @click="git1">点击methods</button>
+			<button type="button" @click="git2()">点击computed</button>
+		</div>
+		<script type="text/javascript">
+			var app = new Vue({
+				el: '#app',
+				data: {
+					name1:'这是vue.js,的methods计算属性练习',
+					name2:'这是vue.js,的computed计算属性练习'
+				},
+				methods:{
+					git1:function(){
+						alert(this.name1)
+						console.log(this.name1)
+					}
+				},
+				computed:{
+					git2:function(){
+						alert(this.name2)
+						console.log(this.name2)
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

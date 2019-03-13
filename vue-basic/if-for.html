@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>作者</title>
+		<!-- //通过CDN引入Vue.js -->
+		<!-- 开发环境版本，包含了有帮助的命令行警告 -->
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+		<style type="text/css">
+			body {}
+
+			#app {
+				width: 250px;
+				margin: 0 auto;
+				position: relative;
+			}
+
+
+			#title {
+				padding-bottom: 0px;
+				/* 				border-bottom: solid 1px #E1E1E1;
+ */
+				overflow: hidden;
+			}
+
+			.title1 {
+				float: left;
+				font-size: 14px;
+				color: #333;
+			}
+
+			.title2 {
+				float: right;
+				font-size: 14px;
+				color: #333;
+			}
+
+			.container {
+				width: 30%;
+				margin: 0 0 0 0;
+			}
+
+			.card {
+				cursor: pointer;
+				width: 250px;
+				height: 50px;
+				background: #FFF;
+				margin: 0 20px 40px 0;
+				padding: 4px;
+				font-size: 14px;
+				color: #333;
+			}
+
+			.card img {
+				border-bottom-right-radius: 30px;
+				border-bottom-left-radius: 30px;
+
+			}
+
+			.ava {
+				width: 70px;
+				height: 70px;
+				float: left;
+				margin-right: 5px;
+				border-radius: 50%;
+				border: 1px solid #ddd;
+			}
+
+			.intro {
+				height: 15px;
+				width: 250px;
+				font-size: 15px;
+				color: #969696;
+			}
+
+
+			.like {
+				float: right;
+				margin-top: 5px;
+				padding: 0;
+				font-size: 13px;
+				color: #42c02e;
+			}
+
+			.att {
+				margin-top: auto;
+				padding-top: 5px;
+				margin-right: 60px;
+				font-size: 18px;
+				display: block;
+			}
+
+			#yes {
+				color: #969696;
+			}
+
+			.button {
+				padding: 7px 7px 7px 12px;
+				width: 100%;
+				font-size: 13px;
+				color: #969696;
+				background-color: #EEEEEE;
+				border: 1px solid #969696;
+				border-radius: 4px;
+				text-align: center;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- vue-app根容器 -->
+		<div id="app">
+			<div id="title">
+				<p v-if="show" class="title1">推荐作者</p>
+				<p class="title2">换一批</p>
+			</div>
+			<div class="container">
+				<!-- 通过循环遍历books数组 -->
+				<div class="card" v-for="people in peoples">
+					<img :src="people.avatar" class="ava">
+					<p class="like" id="yes" v-if="people.like">√已关注</p>
+					<p class="like" id="no" v-else>+关注</p>
+					<p class="att">{{people.name}}</p>
+					<p class="intro">{{people.introduction}}</p>
+				</div>
+			</div>
+			<p class="button">查看全部 ></p>
+		</div>
+		<script type="text/javascript">
+			// 实例化一个Vue对象
+			var app = new Vue({
+				el: '#app',
+				data: {
+					show: true,
+					peoples: [{
+							avatar: 'img/阿栈.png',
+							name: '阿栈',
+							like: false,
+							introduction: '写了465.2k字 · 1.2k喜欢',
+							attention: ''
+						},
+						{
+							avatar: 'img/胡其筒.jpg',
+							name: '胡其筒',
+							like: false,
+							introduction: '写了325k字 · 11k喜欢',
+							attention: ''
+						},
+						{
+							avatar: 'img/汪波.jpg',
+							name: '汪波',
+							like: false,
+							introduction: '写了302.1k字 · 1.9k喜欢',
+							attention: ''
+						},
+						{
+
+							avatar: 'img/梅拾.jpg',
+							name: '梅拾',
+							like: true,
+							introduction: '写了269.3k字 · 23.4k喜欢',
+							attention: ''
+						},
+						{
+							avatar: 'img/徐林.jpg',
+							name: '徐林',
+							like: true,
+							introduction: '写了677.9k字 · 5.5k喜欢',
+							attention: ''
+						}
+					]
+				}
+			})
+		</script>
+	</body>
+</html>

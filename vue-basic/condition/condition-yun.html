@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>我的班课</title>
+		<!-- //通过CDN引入Vue.js -->
+		<!-- 开发环境版本，包含了有帮助的命令行警告 -->
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+		<style type="text/css">
+			body {
+				background-color: #EEEEEE;
+			}
+
+			#app {
+				width: 980px;
+				margin: 0 auto;
+				position: relative;
+			}
+
+			#my-course {
+				position: relative;
+				top: -325px;
+				left: 132px;
+			}
+
+			#title {
+				padding-bottom: 10px;
+				border-bottom: solid 1px #E1E1E1;
+				overflow: hidden;
+			}
+
+			.title1 {
+				float: left;
+				font-size: 14px;
+				color: #333;
+			}
+
+			.title2 {
+				float: right;
+				font-size: 14px;
+				color: #333;
+			}
+
+			.container {
+				display: flex;
+				width: 100%;
+				margin: 20px 0 0 0;
+			}
+
+			.card {
+				cursor: pointer;
+				width: 200px;
+				height: 320px;
+				background: #FFF;
+				display: block;
+				float: left;
+				margin: 0 20px 40px 0;
+				padding: 4px;
+				font-size: 14px;
+				color: #333;
+			}
+
+			.card img {
+				border-bottom-right-radius: 15px;
+				border-bottom-left-radius: 15px;
+
+			}
+
+			.phone2 {
+				width: 35px;
+				height: 35px;
+				float: left;
+				margin-right: 5px;
+				border-radius: 50%;
+			}
+
+			.teachername {
+				display: inline-block;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				vertical-align: middle;
+			}
+
+
+			.like {
+				display: inline-block;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				vertical-align: middle;
+				float: right;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- vue-app根容器 -->
+		<div id="app">
+			<div id="title">
+				<p v-if="show" class="title1">进行中的班课</p>
+				<p class="title2">{{courses.length}}个进行中的班课</p>
+			</div>
+			<div class="container">
+				<!-- 通过循环遍历books数组 -->
+				<div class="card" v-for="course in courses">
+					<img :src="course.cover" class="phone1">
+					<p>{{course.classname}}</p>
+					<p>{{course.course}}</p>
+					<div class="card2">
+						<img :src="course.avatar" class="phone2">
+						<p class="teachername">{{course.teacher}}</p>
+						<p class="like" v-if="course.like">{{course.likecont}}</p>
+					</div>
+					<div id="my-course">
+						<img :src="course.myclass" class="mycourse" v-if="course.like">
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			// 实例化一个Vue对象
+			var app = new Vue({
+				el: '#app',
+				data: {
+					show: true,
+					courses: [{
+							classname: '软件1721',
+							course: 'Web前端框架技术',
+							cover: 'img/Web前端框架技术.jpg',
+							avatar: 'img/cou2.jpg',
+							teacher: '许莫淇',
+							like: false,
+							likecont: '328568',
+							myclass: 'img/我的班课.png'
+						},
+						{
+							classname: '软件1721',
+							course: '轻量级框架技术',
+							cover: 'img/轻量级框架技术.jpg',
+							avatar: 'img/cou2.jpg',
+							teacher: '许莫淇',
+							like: false,
+							likecont: '430555',
+							myclass: 'img/我的班课.png'
+						},
+						{
+							classname: '软件1721',
+							course: 'WeB应用开发',
+							cover: 'img/WeB应用开发.jpg',
+							avatar: 'img/cou3.png',
+							teacher: '李中科',
+							like: false,
+							likecont: '756234',
+							myclass: 'img/我的班课.png'
+						},
+						{
+							classname: '软件1721',
+							course: '摇摆',
+							cover: 'img/默认.png',
+							avatar: 'img/cou1.jpg',
+							teacher: '田寅',
+							like: true,
+							likecont: '764123',
+							myclass: 'img/我的班课.png'
+						}
+					]
+				}
+			})
+		</script>
+	</body>
+</html>
