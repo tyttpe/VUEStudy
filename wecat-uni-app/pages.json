@@ -1,0 +1,52 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "微信"
+			}
+		},
+		{
+			"path": "pages/ucenter/person",
+			"style": {
+				"navigationStyle":"custom",
+				"navigationBarBackgroundColor":"#FFFFFF"
+			}
+			
+		},
+		{
+			"path": "pages/ucenter/setting",
+			"style": {
+				"navigationStyle":"custom",
+				"navigationBarBackgroundColor":"#FFFFFF"
+			}
+			
+		}
+	],
+	"tabBar":{
+		"color":"#000000",
+		"selectedColor":"#2F85FC",
+		"backgroundColor":"#FFFFFF",
+		"borderStyle":"black",
+		"list":[
+			{
+				"pagePath":"pages/index/index",
+				"iconPath":"static/home.png",
+				"selectedIconPath":"static/home-active.png",
+				"text":"微信"
+			},
+			{
+				"pagePath":"pages/ucenter/person",
+				"iconPath":"static/person.png",
+				"selectedIconPath":"static/person-active.png",
+				"text":"我"
+			}
+		]
+	},
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	}
+}

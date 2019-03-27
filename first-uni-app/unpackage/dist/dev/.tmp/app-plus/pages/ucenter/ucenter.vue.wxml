@@ -1,0 +1,1 @@
+<template name="0498a3de"><view class="_view 0498a3de content"><text class="_text 0498a3de title">{{name}}</text><navigator url="setting" class="_navigator 0498a3de"><button type="primary" class="_button 0498a3de">个人设置</button></navigator></view></template>
